@@ -3,6 +3,7 @@ import os
 from langchain_groq import ChatGroq
 from langchain_openai import OpenAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
@@ -16,7 +17,6 @@ import shutil
 # This function loads the API keys for OpenAI and Groq from the environment variables using the .env file.
 def load_api_keys():
     load_dotenv()  # Load environment variables from the .env file
-    os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")  # Set OpenAI API key
     groq_api_key = os.getenv('GROQ_API_KEY')  # Retrieve Groq API key
     return groq_api_key
 
@@ -65,7 +65,7 @@ def split_documents(documents):
 # Step 6: Generate Vector Embeddings
 # This function creates vector embeddings for the text chunks using OpenAI embeddings, and stores them in a FAISS vector database.
 def create_vector_store(final_documents):
-    embeddings = OpenAIEmbeddings()  # Create embeddings for the document chunks
+    embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-mpnet-base-v2")
     vectors = FAISS.from_documents(final_documents, embeddings)  # Store in FAISS vector store for fast retrieval
     return vectors
 
