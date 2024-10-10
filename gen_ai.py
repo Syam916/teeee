@@ -16,8 +16,7 @@ import docx  # For handling DOCX extraction
 # Load environment variables like API keys
 load_dotenv()
 
-# Load the OpenAI and GROQ API keys
-os.environ['OPENAI_API_KEY'] = os.getenv("OPENAI_API_KEY")
+
 groq_api_key = os.getenv('GROQ_API_KEY')
 
 # Set Streamlit page configuration
@@ -150,6 +149,7 @@ def handle_document_upload():
 # -----------------------------------
 def handle_query():
     st.header("🤖 Ask Questions")
+    st.subheader("Powered by Vardaan Data Sciences")
 
     if st.session_state.query_ready:
         st.write("You can now ask questions related to the uploaded documents.")
