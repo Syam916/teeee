@@ -1,0 +1,13 @@
+
+streamlit==1.26.0
+chromadb
+langchain_groq
+langchain
+langchain_openai
+langchain_community
+faiss-cpu
+PYPDF2
+python-docx
+pypdf
+faiss-cpu
+sentence_transformers
